@@ -76,7 +76,68 @@ public class Case {
 
 ​	由于之前已经安装过Git了，直接进入学习阶段。
 
-​	首先找到一个合适的位置，创建空目录，这样就建好了Git的仓库，之后会在这个目录下出现一个.git的目录，是Git用来跟踪管理版本的，不需要动他。（我的仓库目录名是learnlight）
+##### 【1】创建版本库
+
+①首先找到一个合适的位置，创建空目录，这样就建好了Git的仓库，之后会在这个目录下出现一个.git的目录，是Git用来跟踪管理版本的，不需要动他。（我的仓库目录名是javaEE）
+
+```
+$ mkdir javaEE
+$ cd javaEE
+$ pwd
+```
+
+②通过git init把这个目录变成git可以管理的仓库
+
+③把文件添加到版本库：分别用git add和git commit将文件添加和提交到仓库
+
+##### 【2】远程仓库
+
+①创建SSH Key
+
+②登录GitHub添加SSH Key
+
+③添加远程库（GitHub上）并关联本地仓库：
+
+```
+$ git remote add origin git@github.com:Numzan/javeEE.git
+```
+
+④推送到远程库上：git push -u origin master
+
+ps：从远程库克隆可以帮助我们快速从GitHub上获取相关知识，并作出修改。（通过git clone）
+
+## 2、问题及解决方法
+
+##### 【1】git 执行git pull –rebase报错误如下：
+
+**error: Cannot pull with rebase: You have unstaged changes.**
+**error: Additionally, your index contains uncommitted changes.**
+
+原因：如果有未提交的更改，是不能git pull的
+
+解决：
+先执行git stash
+再执行git pull –rebase
+最后再执行git stash pop
+
+git stash #可用来暂存当前正在进行的工作
+git stash pop #从Git栈中读取最近一次保存的内容
+
+##### 【2】git执行push的时候报错如下：
+
+**! [rejected] master -> master (fetch first)**
+
+分析原因，基本上可以确定是因为github上的远程库与本地库版本不一致
+
+①温柔型方案：
+通过git pull 先将本地库更新到与远程库一致的版本，但要注意本地库后来做的修改可能被覆盖，最好使用git fetch(不会自动合并)，查看更新情况再有选择合并，或者先将本地库修改过的文件备份，git pull后再重新修改；
+再运行git push即可成功。
+②暴力型方案：
+git提供了一种强制上传的方式：git push -f ，它会忽略版本不一致等问题，强制将本地库上传的远程库，但是一定要谨慎使用，因为-f会用本地库覆盖掉远程库，如果远程库上有重要更新，或者有其他同伴做的修改，也都会被覆盖，所以一定要在确定无严重后果的前提下使用此操作。
+
+
+
+
 
 ​	
 
