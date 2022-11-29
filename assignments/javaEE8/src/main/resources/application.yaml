@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/whu_edu_zan_db?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 520
+      jpa:
+        show-sql:true
+        hibernate:
+          ddl-auto:update
+      mvc:
+        pathmatch:
+          matching-strategy:ant_path_matcher
+      jwt:
+        secret: a4664280bb05135bdfe79d62078e15347d02440a951896714f4af4e0b7eb2873d1686c1da2da0d048a03673be1e88b1fcea8b9d86a5dc49adbecb14e8b5a5da7
